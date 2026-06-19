@@ -816,3 +816,589 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ===== Settings Modal ===== */
+.settings-info {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.style-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.style-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    border: 1px solid transparent;
+}
+
+.style-option:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.style-option:has(input:checked) {
+    background-color: rgba(var(--accent-cta-rgb), 0.1);
+    border-color: var(--accent-cta);
+}
+
+.style-option input[type="radio"] {
+    margin-top: 4px;
+    accent-color: var(--accent-cta);
+    cursor: pointer;
+}
+
+.style-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.style-option-name {
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.style-option-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+/* ===== UI Style: Modern ===== */
+[data-ui-style="modern"] .header {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .panel-box {
+    border-style: solid;
+    border-radius: 8px;
+}
+
+[data-ui-style="modern"] .panel-header {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .tab {
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .tab.active {
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .btn {
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .btn-primary {
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .modal {
+    border-style: solid;
+    border-radius: 12px;
+}
+
+[data-ui-style="modern"] .modal-header {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .modal-footer {
+    border-top-style: solid;
+}
+
+[data-ui-style="modern"] .form-input,
+[data-ui-style="modern"] .form-select {
+    border-style: solid;
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .data-table th {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .data-table td {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .data-table tfoot td {
+    border-top-style: solid;
+}
+
+[data-ui-style="modern"] .add-entry-btn {
+    border-top-style: solid;
+}
+
+[data-ui-style="modern"] .summary-divider {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .category-summary-header {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .category-summary-row {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .tab-nav {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="modern"] .theme-toggle {
+    border-radius: 6px;
+}
+
+[data-ui-style="modern"] .action-btn {
+    border-radius: 4px;
+}
+
+[data-ui-style="modern"] ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
+/* IBM VGA Font for Retro Style */
+@font-face {
+    font-family: 'IBM VGA';
+    src: url('fonts/WebPlus_IBM_VGA_8x16.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* ===== UI Style: Minimal ===== */
+[data-ui-style="minimal"] .header {
+    border-bottom: none;
+    padding-bottom: 24px;
+}
+
+[data-ui-style="minimal"] .panel-box {
+    border: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+[data-ui-style="minimal"] .panel-header {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .tab-nav {
+    border-bottom: none;
+    gap: 4px;
+    padding-bottom: 16px;
+}
+
+[data-ui-style="minimal"] .tab {
+    border-radius: 20px;
+    padding: 8px 18px;
+}
+
+[data-ui-style="minimal"] .tab.active {
+    border-radius: 20px;
+}
+
+[data-ui-style="minimal"] .btn {
+    border-radius: 20px;
+}
+
+[data-ui-style="minimal"] .btn-primary {
+    border-radius: 20px;
+}
+
+[data-ui-style="minimal"] .modal {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+[data-ui-style="minimal"] .modal-header {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .modal-footer {
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .form-input,
+[data-ui-style="minimal"] .form-select {
+    border: 1px solid var(--bg-tertiary);
+    border-radius: 8px;
+}
+
+[data-ui-style="minimal"] .form-input:focus,
+[data-ui-style="minimal"] .form-select:focus {
+    border-color: var(--accent-cta);
+    box-shadow: none;
+}
+
+[data-ui-style="minimal"] .data-table th {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .data-table td {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .data-table tfoot td {
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .add-entry-btn {
+    border-top: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .summary-divider {
+    border-bottom: none;
+    height: 16px;
+}
+
+[data-ui-style="minimal"] .category-summary-header {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .category-summary-row {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="minimal"] .theme-toggle {
+    border-radius: 20px;
+}
+
+[data-ui-style="minimal"] .action-btn {
+    border-radius: 4px;
+}
+
+[data-ui-style="minimal"] ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+}
+
+[data-ui-style="minimal"] .style-option {
+    border-radius: 8px;
+}
+
+/* ===== UI Style: Retro (DOS) ===== */
+[data-ui-style="retro"] {
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-tertiary: #1a1a1a;
+    --text-primary: #aaaaaa;
+    --text-secondary: #555555;
+    --text-muted: #333333;
+    --accent-cta: #55ffff;
+    --accent-cta-dim: #00aaaa;
+    --accent-cta-rgb: 85, 255, 255;
+    --accent-purple: #ff55ff;
+    --accent-purple-dim: #aa00aa;
+    --accent-green: #55ff55;
+    --accent-green-dim: #00aa00;
+    --accent-red: #ff5555;
+    --accent-red-dim: #aa0000;
+    --accent-blue: #5555ff;
+    --border: #555555;
+    --border-light: #aaaaaa;
+    --modal-backdrop: rgba(0, 0, 0, 0.9);
+    --shadow: none;
+}
+
+html[data-ui-style="retro"] {
+    font-size: 18px;
+}
+
+[data-ui-style="retro"] body {
+    font-family: 'IBM VGA', monospace;
+    line-height: 1.4;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+    text-rendering: optimizeSpeed;
+}
+
+[data-ui-style="retro"] .header {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .panel-box {
+    border: 1px solid var(--border);
+    box-shadow: none;
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] .panel-header {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .tab-nav {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .tab {
+    border-radius: 0;
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .tab.active {
+    background-color: var(--accent-cta);
+    color: #000000;
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] .btn {
+    border-radius: 0;
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .btn-primary {
+    background-color: var(--accent-cta);
+    color: #000000;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+[data-ui-style="retro"] .btn-primary:hover {
+    background-color: var(--text-primary);
+    box-shadow: none;
+}
+
+[data-ui-style="retro"] .btn-secondary:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .btn-danger {
+    background-color: var(--accent-red);
+    color: #000000;
+}
+
+[data-ui-style="retro"] .btn-danger:hover {
+    box-shadow: none;
+}
+
+[data-ui-style="retro"] .modal {
+    border: 2px solid var(--border);
+    box-shadow: none;
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] .modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .modal-footer {
+    border-top: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .form-input,
+[data-ui-style="retro"] .form-select {
+    border: 1px solid var(--border);
+    border-radius: 0;
+    background-color: #000000;
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .form-input:focus,
+[data-ui-style="retro"] .form-select:focus {
+    border-color: var(--accent-cta);
+    box-shadow: none;
+}
+
+[data-ui-style="retro"] .data-table th {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .data-table td {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .data-table tfoot td {
+    border-top: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .data-table tbody tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .add-entry-btn {
+    border-top: 1px solid var(--border);
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .add-entry-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .summary-divider {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .category-summary-header {
+    border-bottom: 1px solid var(--border);
+}
+
+[data-ui-style="retro"] .category-summary-row {
+    border-bottom: 1px solid var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .category-summary-row:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .theme-toggle {
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] .action-btn {
+    border-radius: 0;
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .action-btn:hover {
+    background-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] ::-webkit-scrollbar-track {
+    background: #000000;
+}
+
+[data-ui-style="retro"] .style-option {
+    border-radius: 0;
+}
+
+[data-ui-style="retro"] .style-option:has(input:checked) {
+    border-color: var(--accent-cta);
+}
+
+/* Retro: Tighter spacing */
+[data-ui-style="retro"] .header {
+    padding: 10px 0;
+}
+
+[data-ui-style="retro"] .main {
+    padding: 16px 0;
+}
+
+[data-ui-style="retro"] .summary-section {
+    margin-bottom: 20px;
+}
+
+[data-ui-style="retro"] .net-worth-display {
+    margin-bottom: 20px;
+}
+
+[data-ui-style="retro"] .tab-nav {
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+}
+
+[data-ui-style="retro"] .panel-header {
+    padding: 10px 14px;
+}
+
+[data-ui-style="retro"] .data-table th {
+    padding: 6px 10px;
+}
+
+[data-ui-style="retro"] .data-table td {
+    padding: 4px 10px;
+}
+
+[data-ui-style="retro"] .data-table tfoot td {
+    padding: 6px 10px;
+}
+
+[data-ui-style="retro"] .add-entry-btn {
+    padding: 10px 14px;
+}
+
+[data-ui-style="retro"] .category-summary-header {
+    padding: 6px 0;
+}
+
+[data-ui-style="retro"] .category-summary-row {
+    padding: 6px 0;
+}
+
+[data-ui-style="retro"] .ppf-details,
+[data-ui-style="retro"] .pf-details {
+    padding: 14px;
+}
+
+[data-ui-style="retro"] .detail-grid {
+    gap: 16px;
+}
+
+[data-ui-style="retro"] .modal-header {
+    padding: 12px 16px;
+}
+
+[data-ui-style="retro"] .modal-body {
+    padding: 14px 16px;
+}
+
+[data-ui-style="retro"] .modal-footer {
+    padding: 12px 16px;
+}
+
+[data-ui-style="retro"] .form-group {
+    margin-bottom: 12px;
+}
+
+[data-ui-style="retro"] .form-input,
+[data-ui-style="retro"] .form-select {
+    padding: 8px 10px;
+}
+
+[data-ui-style="retro"] .net-worth-value {
+    color: #ffffff;
+}
+
+[data-ui-style="retro"] .net-worth-delta {
+    color: var(--accent-green);
+}
+
+[data-ui-style="retro"] .net-worth-delta.negative {
+    color: var(--accent-red);
+}
+
+[data-ui-style="retro"] .positive {
+    color: var(--accent-green) !important;
+}
+
+[data-ui-style="retro"] .negative {
+    color: var(--accent-red) !important;
+}
+
+[data-ui-style="retro"] .logo {
+    color: var(--accent-purple);
+}
+
+[data-ui-style="retro"] .panel-title {
+    color: var(--accent-cta);
+}
+
+[data-ui-style="retro"] .section-title {
+    color: var(--accent-cta);
+}
+
+[data-ui-style="retro"] .add-entry-btn .prompt {
+    color: var(--accent-purple);
+}
+
+/* Retro light theme adjustments - keep dark for CRT aesthetic */
+[data-ui-style="retro"][data-theme="light"] {
+    --bg-primary: #000000;
+    --bg-secondary: #000000;
+    --bg-tertiary: #1a1a1a;
+    --text-primary: #aaaaaa;
+    --text-secondary: #555555;
+    --text-muted: #333333;
+}
