@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fin-track</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-title">
+                <span class="logo">$</span> fin-track
+            </div>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" title="Toggle theme">
+                    <span class="icon-sun">☀</span>
+                    <span class="icon-moon">☽</span>
+                </button>
+                <button class="btn btn-secondary" id="importBtn">
+                    <span class="btn-icon">↑</span> Import
+                </button>
+                <button class="btn btn-secondary" id="exportBtn">
+                    <span class="btn-icon">↓</span> Export
+                </button>
+                <button class="btn btn-primary" id="updateSnapshotBtn">
+                    <span class="btn-icon">◉</span> Update Snapshot
+                </button>
+            </div>
+            <input type="file" id="importFile" accept=".json" style="display: none;">
+        </header>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Portfolio Summary -->
+            <section class="summary-section">
+                <h2 class="section-title">PORTFOLIO SUMMARY</h2>
+                <div class="summary-divider"></div>
+
+                <div class="net-worth-display">
+                    <div class="net-worth-label">Total Net Worth</div>
+                    <div class="net-worth-row">
+                        <span class="net-worth-value" id="totalNetWorth">₹ 0</span>
+                        <span class="net-worth-delta" id="totalDelta">+₹0 (+0.0%)</span>
+                    </div>
+                    <div class="net-worth-comparison">
+                        <span class="comparison-current">Current</span>
+                        <span class="comparison-vs">vs Last (<span id="previousDate">--</span>)</span>
+                    </div>
+                </div>
+
+                <div class="category-summary">
+                    <div class="category-summary-header">
+                        <span class="col-category">Category</span>
+                        <span class="col-current">Current</span>
+                        <span class="col-previous">Previous</span>
+                        <span class="col-change">Change</span>
+                    </div>
+                    <div class="category-summary-divider"></div>
+                    <div class="category-summary-row" data-group="liquid">
+                        <span class="col-category">Liquid</span>
+                        <span class="col-current" id="liquidCurrent">₹ 0</span>
+                        <span class="col-previous" id="liquidPrevious">₹ 0</span>
+                        <span class="col-change" id="liquidChange">+₹0</span>
+                    </div>
+                    <div class="category-summary-row" data-group="fixed">
+                        <span class="col-category">Fixed Income</span>
+                        <span class="col-current" id="fixedCurrent">₹ 0</span>
+                        <span class="col-previous" id="fixedPrevious">₹ 0</span>
+                        <span class="col-change" id="fixedChange">+₹0</span>
+                    </div>
+                    <div class="category-summary-row" data-group="equity">
+                        <span class="col-category">Equity</span>
+                        <span class="col-current" id="equityCurrent">₹ 0</span>
+                        <span class="col-previous" id="equityPrevious">₹ 0</span>
+                        <span class="col-change" id="equityChange">+₹0</span>
+                    </div>
+                    <div class="category-summary-row" data-group="retirement">
+                        <span class="col-category">Retirement</span>
+                        <span class="col-current" id="retirementCurrent">₹ 0</span>
+                        <span class="col-previous" id="retirementPrevious">₹ 0</span>
+                        <span class="col-change" id="retirementChange">+₹0</span>
+                    </div>
+                    <div class="category-summary-row" data-group="physical">
+                        <span class="col-category">Physical Assets</span>
+                        <span class="col-current" id="physicalCurrent">₹ 0</span>
+                        <span class="col-previous" id="physicalPrevious">₹ 0</span>
+                        <span class="col-change" id="physicalChange">+₹0</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-nav">
+                <button class="tab active" data-tab="savings">Savings</button>
+                <button class="tab" data-tab="fd">FD</button>
+                <button class="tab" data-tab="ppf">PPF</button>
+                <button class="tab" data-tab="equity">Equity</button>
+                <button class="tab" data-tab="mf">MF</button>
+                <button class="tab" data-tab="gold">Gold</button>
+                <button class="tab" data-tab="pf">PF</button>
+                <button class="tab" data-tab="assets">Assets</button>
+            </nav>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Savings Accounts Tab -->
+                <div class="tab-panel active" id="savings-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">SAVINGS ACCOUNTS</span>
+                            <span class="panel-total">Total: <span id="savingsTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bank</th>
+                                        <th>Account</th>
+                                        <th>A/C No.</th>
+                                        <th class="text-right">Balance</th>
+                                        <th>As Of</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="savingsTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="6">No savings accounts added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="savings">
+                            <span class="prompt">&gt;</span> Add savings account...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Fixed Deposits Tab -->
+                <div class="tab-panel" id="fd-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">FIXED DEPOSITS</span>
+                            <span class="panel-total">Total: <span id="fdTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Bank</th>
+                                        <th class="text-right">Principal</th>
+                                        <th class="text-right">Rate</th>
+                                        <th>Start</th>
+                                        <th>Maturity</th>
+                                        <th class="text-right">Current Value</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="fdTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="7">No fixed deposits added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="fd">
+                            <span class="prompt">&gt;</span> Add fixed deposit...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PPF Tab -->
+                <div class="tab-panel" id="ppf-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">PUBLIC PROVIDENT FUND</span>
+                        </div>
+                        <div class="ppf-details" id="ppfDetails">
+                            <div class="ppf-empty">No PPF account added</div>
+                        </div>
+                        <button class="add-entry-btn" data-category="ppf" id="ppfAddBtn">
+                            <span class="prompt">&gt;</span> Add/Edit PPF account...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Equity Tab -->
+                <div class="tab-panel" id="equity-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">EQUITY HOLDINGS</span>
+                            <span class="panel-total">Total: <span id="equityTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Symbol</th>
+                                        <th>Name</th>
+                                        <th class="text-right">Qty</th>
+                                        <th class="text-right">Avg</th>
+                                        <th class="text-right">LTP</th>
+                                        <th class="text-right">P&L</th>
+                                        <th class="text-right">%Chg</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="equityTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="8">No equity holdings added</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot id="equityTableFoot" style="display: none;">
+                                    <tr>
+                                        <td colspan="3"><strong>TOTAL</strong></td>
+                                        <td class="text-right" id="equityInvested">0</td>
+                                        <td class="text-right" id="equityCurrentVal">0</td>
+                                        <td class="text-right" id="equityPnL">0</td>
+                                        <td class="text-right" id="equityPnLPct">0%</td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="equity">
+                            <span class="prompt">&gt;</span> Add holding...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mutual Funds Tab -->
+                <div class="tab-panel" id="mf-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">MUTUAL FUNDS</span>
+                            <span class="panel-total">Total: <span id="mfTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fund Name</th>
+                                        <th>Folio</th>
+                                        <th class="text-right">Units</th>
+                                        <th class="text-right">NAV</th>
+                                        <th class="text-right">Invested</th>
+                                        <th class="text-right">Current</th>
+                                        <th class="text-right">Gain</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="mfTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="8">No mutual funds added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="mf">
+                            <span class="prompt">&gt;</span> Add mutual fund...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Gold Bonds Tab -->
+                <div class="tab-panel" id="gold-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">SOVEREIGN GOLD BONDS</span>
+                            <span class="panel-total">Total: <span id="goldTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Series</th>
+                                        <th class="text-right">Units (gm)</th>
+                                        <th class="text-right">Issue Price</th>
+                                        <th class="text-right">Current Gold</th>
+                                        <th class="text-right">Interest</th>
+                                        <th class="text-right">Current Value</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="goldTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="7">No gold bonds added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="gold">
+                            <span class="prompt">&gt;</span> Add gold bond...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Provident Fund Tab -->
+                <div class="tab-panel" id="pf-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">EMPLOYEE PROVIDENT FUND</span>
+                        </div>
+                        <div class="pf-details" id="pfDetails">
+                            <div class="pf-empty">No PF account added</div>
+                        </div>
+                        <button class="add-entry-btn" data-category="pf" id="pfAddBtn">
+                            <span class="prompt">&gt;</span> Add/Edit PF account...
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Physical Assets Tab -->
+                <div class="tab-panel" id="assets-panel">
+                    <div class="panel-box">
+                        <div class="panel-header">
+                            <span class="panel-title">PHYSICAL ASSETS</span>
+                            <span class="panel-total">Net Value: <span id="assetsTotal">₹ 0</span></span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Name</th>
+                                        <th>Location</th>
+                                        <th class="text-right">Purchase</th>
+                                        <th class="text-right">Current</th>
+                                        <th class="text-right">Loan</th>
+                                        <th class="text-right">Net Value</th>
+                                        <th class="actions-col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="assetsTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="8">No physical assets added</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button class="add-entry-btn" data-category="assets">
+                            <span class="prompt">&gt;</span> Add asset...
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal -->
+        <div class="modal-overlay" id="modalOverlay">
+            <div class="modal" id="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modalTitle">Add Entry</h3>
+                    <button class="modal-close" id="modalClose">&times;</button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Dynamic form content -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="modalCancel">Cancel</button>
+                    <button class="btn btn-primary" id="modalSave">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div class="modal-overlay" id="confirmOverlay">
+            <div class="modal modal-confirm">
+                <div class="modal-header">
+                    <h3 class="modal-title">Confirm Delete</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmMessage">Are you sure you want to delete this entry?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="confirmCancel">Cancel</button>
+                    <button class="btn btn-danger" id="confirmDelete">Delete</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Snapshot Modal -->
+        <div class="modal-overlay" id="snapshotOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Update Snapshot</h3>
+                    <button class="modal-close" id="snapshotClose">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="snapshot-info">
+                        This will save your current portfolio as a snapshot for comparison.
+                        The current snapshot will become the "previous" snapshot.
+                    </p>
+                    <div class="form-group">
+                        <label class="form-label">Snapshot Date</label>
+                        <input type="date" class="form-input" id="snapshotDate">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="snapshotCancel">Cancel</button>
+                    <button class="btn btn-primary" id="snapshotConfirm">Save Snapshot</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

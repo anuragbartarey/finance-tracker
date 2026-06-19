@@ -1,0 +1,257 @@
+{
+  "version": "1.0",
+  "currency": "INR",
+  "current": {
+    "date": "2024-06-18",
+    "total_value": 18545000
+  },
+  "previous": {
+    "date": "2024-04-15",
+    "total_value": 18000000,
+    "savings_total": 1480000,
+    "fd_total": 1020000,
+    "ppf_total": 800000,
+    "equity_total": 1420000,
+    "mf_total": 2600000,
+    "gold_total": 80000,
+    "pf_total": 420000,
+    "assets_total": 10180000
+  },
+  "savings_accounts": [
+    {
+      "id": "sav_001",
+      "bank": "HDFC Bank",
+      "account_name": "Primary Savings",
+      "account_number_masked": "xxxx1234",
+      "balance": 250000,
+      "as_of_date": "2024-06-18"
+    },
+    {
+      "id": "sav_002",
+      "bank": "ICICI Bank",
+      "account_name": "Secondary Savings",
+      "account_number_masked": "xxxx5678",
+      "balance": 175000,
+      "as_of_date": "2024-06-15"
+    },
+    {
+      "id": "sav_003",
+      "bank": "SBI",
+      "account_name": "Emergency Fund",
+      "account_number_masked": "xxxx9012",
+      "balance": 1095000,
+      "as_of_date": "2024-06-10"
+    }
+  ],
+  "fixed_deposits": [
+    {
+      "id": "fd_001",
+      "bank": "SBI",
+      "principal": 500000,
+      "rate": 7.1,
+      "start_date": "2024-01-15",
+      "maturity_date": "2025-01-15",
+      "maturity_value": 535500,
+      "current_value": 520000
+    },
+    {
+      "id": "fd_002",
+      "bank": "HDFC Bank",
+      "principal": 300000,
+      "rate": 7.25,
+      "start_date": "2023-06-01",
+      "maturity_date": "2025-06-01",
+      "maturity_value": 345750,
+      "current_value": 335000
+    },
+    {
+      "id": "fd_003",
+      "bank": "ICICI Bank",
+      "principal": 200000,
+      "rate": 6.9,
+      "start_date": "2024-03-10",
+      "maturity_date": "2025-03-10",
+      "maturity_value": 213800,
+      "current_value": 205000
+    }
+  ],
+  "ppf": {
+    "account_holder": "Self",
+    "bank": "SBI",
+    "balance": 850000,
+    "year_contributions": 150000,
+    "interest_rate": 7.1,
+    "maturity_year": 2035
+  },
+  "equity": [
+    {
+      "id": "eq_001",
+      "symbol": "RELIANCE",
+      "name": "Reliance Industries",
+      "quantity": 10,
+      "avg_price": 2450,
+      "current_price": 2890,
+      "broker": "Zerodha"
+    },
+    {
+      "id": "eq_002",
+      "symbol": "TCS",
+      "name": "Tata Consultancy Services",
+      "quantity": 5,
+      "avg_price": 3200,
+      "current_price": 3450,
+      "broker": "Zerodha"
+    },
+    {
+      "id": "eq_003",
+      "symbol": "INFY",
+      "name": "Infosys Limited",
+      "quantity": 20,
+      "avg_price": 1450,
+      "current_price": 1380,
+      "broker": "Zerodha"
+    },
+    {
+      "id": "eq_004",
+      "symbol": "HDFCBANK",
+      "name": "HDFC Bank",
+      "quantity": 15,
+      "avg_price": 1520,
+      "current_price": 1680,
+      "broker": "Groww"
+    },
+    {
+      "id": "eq_005",
+      "symbol": "ICICIBANK",
+      "name": "ICICI Bank",
+      "quantity": 25,
+      "avg_price": 980,
+      "current_price": 1120,
+      "broker": "Groww"
+    }
+  ],
+  "mutual_funds": [
+    {
+      "id": "mf_001",
+      "name": "Axis Bluechip Fund - Direct Growth",
+      "folio": "12345/67",
+      "units": 2345.678,
+      "nav": 52.35,
+      "invested_amount": 100000,
+      "current_value": 122800
+    },
+    {
+      "id": "mf_002",
+      "name": "Mirae Asset Large Cap Fund - Direct Growth",
+      "folio": "98765/43",
+      "units": 1856.234,
+      "nav": 89.75,
+      "invested_amount": 150000,
+      "current_value": 166597
+    },
+    {
+      "id": "mf_003",
+      "name": "Parag Parikh Flexi Cap Fund - Direct Growth",
+      "folio": "54321/89",
+      "units": 3421.567,
+      "nav": 65.20,
+      "invested_amount": 200000,
+      "current_value": 223086
+    },
+    {
+      "id": "mf_004",
+      "name": "Kotak Emerging Equity Fund - Direct Growth",
+      "folio": "11223/44",
+      "units": 4567.890,
+      "nav": 82.45,
+      "invested_amount": 300000,
+      "current_value": 376573
+    },
+    {
+      "id": "mf_005",
+      "name": "SBI Small Cap Fund - Direct Growth",
+      "folio": "55667/88",
+      "units": 1234.567,
+      "nav": 145.80,
+      "invested_amount": 150000,
+      "current_value": 180000
+    },
+    {
+      "id": "mf_006",
+      "name": "HDFC Index Fund - Nifty 50 Plan - Direct Growth",
+      "folio": "99887/66",
+      "units": 5678.901,
+      "nav": 178.25,
+      "invested_amount": 900000,
+      "current_value": 1011812
+    }
+  ],
+  "gold_bonds": [
+    {
+      "id": "gold_001",
+      "series": "SGB 2023-24 Series I",
+      "units": 4,
+      "issue_price": 5926,
+      "current_gold_price": 7250,
+      "interest_rate": 2.5
+    },
+    {
+      "id": "gold_002",
+      "series": "SGB 2022-23 Series IV",
+      "units": 6,
+      "issue_price": 5409,
+      "current_gold_price": 7250,
+      "interest_rate": 2.5
+    }
+  ],
+  "provident_fund": {
+    "type": "EPF",
+    "uan": "xxxx-xxxx-4567",
+    "employer": "Tech Company Pvt Ltd",
+    "balance": 450000,
+    "employee_share": 220000,
+    "employer_share": 230000
+  },
+  "physical_assets": [
+    {
+      "id": "asset_001",
+      "type": "property",
+      "name": "2BHK Flat",
+      "location": "Bangalore, HSR Layout",
+      "purchase_date": "2020-03-15",
+      "purchase_value": 6500000,
+      "current_value": 8500000,
+      "loan_outstanding": 2500000
+    },
+    {
+      "id": "asset_002",
+      "type": "vehicle",
+      "name": "Honda City ZX",
+      "location": "Bangalore",
+      "purchase_date": "2022-06-01",
+      "purchase_value": 1500000,
+      "current_value": 1100000,
+      "loan_outstanding": 0
+    },
+    {
+      "id": "asset_003",
+      "type": "jewelry",
+      "name": "Gold Jewelry",
+      "location": "Bank Locker",
+      "purchase_date": "2019-11-15",
+      "purchase_value": 800000,
+      "current_value": 1450000,
+      "loan_outstanding": 0
+    },
+    {
+      "id": "asset_004",
+      "type": "property",
+      "name": "Plot - Mysore Road",
+      "location": "Bangalore, Mysore Road",
+      "purchase_date": "2021-08-20",
+      "purchase_value": 2000000,
+      "current_value": 3200000,
+      "loan_outstanding": 500000
+    }
+  ]
+}
