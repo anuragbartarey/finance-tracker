@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ui-style="terminal">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>fin-track</title>
+    <title>FOSPHOR</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,12 +11,15 @@
         <!-- Header -->
         <header class="header">
             <div class="header-title">
-                <span class="logo">$</span> fin-track
+                <span class="logo">$</span> FOSPHOR
             </div>
             <div class="header-actions">
                 <button class="theme-toggle" id="themeToggle" title="Toggle theme">
                     <span class="icon-sun">☀</span>
                     <span class="icon-moon">☽</span>
+                </button>
+                <button class="btn btn-secondary" id="settingsBtn" title="Settings">
+                    <span class="btn-icon">⚙</span> Style
                 </button>
                 <button class="btn btn-secondary" id="importBtn">
                     <span class="btn-icon">↑</span> Import
@@ -25,7 +28,7 @@
                     <span class="btn-icon">↓</span> Export
                 </button>
                 <button class="btn btn-primary" id="updateSnapshotBtn">
-                    <span class="btn-icon">◉</span> Update Snapshot
+                    <span class="btn-icon">◉</span> Update
                 </button>
             </div>
             <input type="file" id="importFile" accept=".json" style="display: none;">
@@ -35,7 +38,7 @@
         <main class="main">
             <!-- Portfolio Summary -->
             <section class="summary-section">
-                <h2 class="section-title">PORTFOLIO SUMMARY</h2>
+                <h2 class="section-title">SUMMARY</h2>
                 <div class="summary-divider"></div>
 
                 <div class="net-worth-display">
@@ -403,6 +406,78 @@
                 </div>
             </div>
         </div>
+
+        <!-- Settings Modal -->
+        <div class="modal-overlay" id="settingsOverlay">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">UI Style</h3>
+                    <button class="modal-close" id="settingsClose">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p class="settings-info">Choose your preferred UI style. Changes are applied instantly.</p>
+                    <div class="style-options">
+                        <label class="style-option">
+                            <input type="radio" name="uiStyle" value="terminal" checked>
+                            <div class="style-option-content">
+                                <span class="style-option-name">Terminal</span>
+                                <span class="style-option-desc">Sharp edges, dashed borders, monospace feel</span>
+                            </div>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="uiStyle" value="modern">
+                            <div class="style-option-content">
+                                <span class="style-option-name">Modern</span>
+                                <span class="style-option-desc">Rounded corners, solid borders, clean look</span>
+                            </div>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="uiStyle" value="minimal">
+                            <div class="style-option-content">
+                                <span class="style-option-name">Minimal</span>
+                                <span class="style-option-desc">No borders, subtle shadows, spacious</span>
+                            </div>
+                        </label>
+                        <label class="style-option">
+                            <input type="radio" name="uiStyle" value="retro">
+                            <div class="style-option-content">
+                                <span class="style-option-name">Retro</span>
+                                <span class="style-option-desc">DOS terminal, IBM VGA font, CRT aesthetic</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="settingsClose2">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Retro ASCII Footer -->
+        <footer class="retro-footer">
+            <!-- Option 1: DOS-style footer bar -->
+            <pre class="ascii-art ascii-footer-bar">
+════════════════════════════════════════════════════════════════════════════════
+  NO DATA IS STORED ONLINE. USE IT LOCALLY LIKE 90S. MANAGE YOUR OWN DATA.
+════════════════════════════════════════════════════════════════════════════════</pre>
+
+            <!-- Option 2: Big ASCII banner -->
+            <pre class="ascii-art ascii-banner">
+┌──────────────────────────────────────────────────────────────┐
+│  ███████╗ ██████╗ ███████╗██████╗ ██╗  ██╗ ██████╗ ██████╗   │
+│  ██╔════╝██╔═══██╗██╔════╝██╔══██╗██║  ██║██╔═══██╗██╔══██╗  │
+│  █████╗  ██║   ██║███████╗██████╔╝███████║██║   ██║██████╔╝  │
+│  ██╔══╝  ██║   ██║╚════██║██╔═══╝ ██╔══██║██║   ██║██╔══██╗  │
+│  ██║     ╚██████╔╝███████║██║     ██║  ██║╚██████╔╝██║  ██║  │
+│  ╚═╝      ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝  │
+└──────────────────────────────────────────────────────────────┘</pre>
+
+            <!-- Option 3: DOS prompt style -->
+            <pre class="ascii-art ascii-prompt">
+────────────────────────────────────────────────────────────────────────────────
+C:\FOSPHOR> Track your wealth_█
+────────────────────────────────────────────────────────────────────────────────</pre>
+        </footer>
     </div>
 
     <script src="app.js"></script>

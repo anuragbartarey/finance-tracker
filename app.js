@@ -1,5 +1,6 @@
 // ===== Theme Handling =====
 const THEME_KEY = 'fintrack_theme';
+const STYLE_KEY = 'fintrack_ui_style';
 
 function initTheme() {
     const savedTheme = localStorage.getItem(THEME_KEY);
@@ -28,6 +29,44 @@ function toggleTheme() {
     localStorage.setItem(THEME_KEY, newTheme);
 }
 
+// ===== UI Style Handling =====
+function initUIStyle() {
+    const savedStyle = localStorage.getItem(STYLE_KEY) || 'terminal';
+    setUIStyle(savedStyle);
+
+    // Set the radio button
+    const radio = document.querySelector(`input[name="uiStyle"][value="${savedStyle}"]`);
+    if (radio) radio.checked = true;
+
+    // Listen for style changes
+    document.querySelectorAll('input[name="uiStyle"]').forEach(radio => {
+        radio.addEventListener('change', (e) => {
+            setUIStyle(e.target.value);
+            localStorage.setItem(STYLE_KEY, e.target.value);
+        });
+    });
+
+    // Settings modal handlers
+    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
+    document.getElementById('settingsClose').addEventListener('click', closeSettingsModal);
+    document.getElementById('settingsClose2').addEventListener('click', closeSettingsModal);
+    document.getElementById('settingsOverlay').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeSettingsModal();
+    });
+}
+
+function setUIStyle(style) {
+    document.documentElement.setAttribute('data-ui-style', style);
+}
+
+function openSettingsModal() {
+    document.getElementById('settingsOverlay').classList.add('active');
+}
+
+function closeSettingsModal() {
+    document.getElementById('settingsOverlay').classList.remove('active');
+}
+
 // ===== Data Store =====
 const STORAGE_KEY = 'fintrack_data';
 
@@ -54,6 +93,7 @@ let appData = null;
 // ===== Initialization =====
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
+    initUIStyle();
     loadData();
     initTabs();
     initModals();
