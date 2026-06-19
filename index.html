@@ -14,12 +14,12 @@
                 <span class="logo">$</span> FOSPHOR
             </div>
             <div class="header-actions">
-                <button class="btn btn-secondary" id="settingsBtn" title="Settings">
-                    <span class="btn-icon">⚙</span> Style
-                </button>
                 <button class="theme-toggle" id="themeToggle" title="Toggle theme">
                     <span class="icon-sun">☀</span>
                     <span class="icon-moon">☽</span>
+                </button>
+                <button class="btn btn-secondary" id="settingsBtn" title="Settings">
+                    <span class="btn-icon">⚙</span> Style
                 </button>
                 <button class="btn btn-secondary" id="importBtn">
                     <span class="btn-icon">↑</span> Import
@@ -28,7 +28,7 @@
                     <span class="btn-icon">↓</span> Export
                 </button>
                 <button class="btn btn-primary" id="updateSnapshotBtn">
-                    <span class="btn-icon">◉</span> Update Snapshot
+                    <span class="btn-icon">◉</span> Update
                 </button>
             </div>
             <input type="file" id="importFile" accept=".json" style="display: none;">
@@ -452,6 +452,32 @@
                 </div>
             </div>
         </div>
+
+        <!-- Retro ASCII Footer -->
+        <footer class="retro-footer">
+            <!-- Option 1: DOS-style footer bar -->
+            <pre class="ascii-art ascii-footer-bar">
+════════════════════════════════════════════════════════════════════════════════
+  NO DATA IS STORED ONLINE. USE IT LOCALLY LIKE 90S. MANAGE YOUR OWN DATA.
+════════════════════════════════════════════════════════════════════════════════</pre>
+
+            <!-- Option 2: Big ASCII banner -->
+            <pre class="ascii-art ascii-banner">
+┌──────────────────────────────────────────────────────────────┐
+│  ███████╗ ██████╗ ███████╗██████╗ ██╗  ██╗ ██████╗ ██████╗   │
+│  ██╔════╝██╔═══██╗██╔════╝██╔══██╗██║  ██║██╔═══██╗██╔══██╗  │
+│  █████╗  ██║   ██║███████╗██████╔╝███████║██║   ██║██████╔╝  │
+│  ██╔══╝  ██║   ██║╚════██║██╔═══╝ ██╔══██║██║   ██║██╔══██╗  │
+│  ██║     ╚██████╔╝███████║██║     ██║  ██║╚██████╔╝██║  ██║  │
+│  ╚═╝      ╚═════╝ ╚══════╝╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝  │
+└──────────────────────────────────────────────────────────────┘</pre>
+
+            <!-- Option 3: DOS prompt style -->
+            <pre class="ascii-art ascii-prompt">
+────────────────────────────────────────────────────────────────────────────────
+C:\FOSPHOR> Track your wealth_█
+────────────────────────────────────────────────────────────────────────────────</pre>
+        </footer>
     </div>
 
     <script src="app.js"></script>
