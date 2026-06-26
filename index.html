@@ -18,9 +18,6 @@
                     <span class="icon-sun">☀</span>
                     <span class="icon-moon">☽</span>
                 </button>
-                <button class="btn btn-secondary" id="settingsBtn" title="Settings">
-                    <span class="btn-icon">⚙</span> Style
-                </button>
                 <button class="btn btn-secondary" id="importBtn">
                     <span class="btn-icon">↑</span> Import
                 </button>
@@ -30,6 +27,22 @@
                 <button class="btn btn-primary" id="updateSnapshotBtn">
                     <span class="btn-icon">◉</span> Update
                 </button>
+                <div class="dropdown" id="utilsDropdown">
+                    <button class="btn btn-secondary" id="utilsBtn">
+                        <span class="btn-icon">▤</span> Utils <span class="dropdown-arrow">▾</span>
+                    </button>
+                    <div class="dropdown-menu" id="utilsMenu">
+                        <button class="dropdown-item" id="styleBtn">
+                            <span class="dropdown-icon">⚙</span> Style
+                        </button>
+                        <button class="dropdown-item" id="notepadBtn">
+                            <span class="dropdown-icon">📝</span> Notepad
+                        </button>
+                        <button class="dropdown-item" id="stockAvgBtn">
+                            <span class="dropdown-icon">📊</span> Stock Average Pro
+                        </button>
+                    </div>
+                </div>
             </div>
             <input type="file" id="importFile" accept=".json" style="display: none;">
         </header>
@@ -449,6 +462,108 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="settingsClose2">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notepad Modal -->
+        <div class="modal-overlay" id="notepadOverlay">
+            <div class="modal modal-notepad">
+                <div class="modal-header">
+                    <h3 class="modal-title">📝 Notepad</h3>
+                    <button class="modal-close" id="notepadClose">&times;</button>
+                </div>
+                <div class="modal-body notepad-body">
+                    <textarea class="notepad-textarea" id="notepadText" placeholder="Write your notes here..."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <span class="notepad-status" id="notepadStatus">Ready</span>
+                    <button class="btn btn-secondary" id="notepadClear">Clear</button>
+                    <button class="btn btn-primary" id="notepadSave">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stock Average Pro Modal -->
+        <div class="modal-overlay" id="stockAvgOverlay">
+            <div class="modal modal-stock-avg">
+                <div class="modal-header">
+                    <h3 class="modal-title">📊 Stock Average Pro</h3>
+                    <button class="modal-close" id="stockAvgClose">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="stock-avg-section">
+                        <div class="stock-avg-section-title">Current Holding</div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Stock Name</label>
+                                <input type="text" class="form-input" id="avgStockName" placeholder="e.g. RELIANCE">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Avg Buy Price (₹)</label>
+                                <input type="number" class="form-input" id="avgBuyPrice" placeholder="0.00" step="0.01">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Quantity Held</label>
+                                <input type="number" class="form-input" id="avgQtyHeld" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Invested Amount</label>
+                                <div class="form-input-display" id="avgInvestedAmt">₹ 0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="stock-avg-section">
+                        <div class="stock-avg-section-title">Add Scenario</div>
+                        <div class="form-row form-row-3">
+                            <div class="form-group">
+                                <label class="form-label">Buy Price (₹)</label>
+                                <input type="number" class="form-input" id="avgNewPrice" placeholder="0.00" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Qty to Buy</label>
+                                <input type="number" class="form-input" id="avgNewQty" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Amount</label>
+                                <div class="form-input-display" id="avgNewAmount">₹ 0</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-add-scenario" id="stockAvgAdd">
+                            <span class="btn-icon">+</span> Add Scenario
+                        </button>
+                    </div>
+
+                    <div class="stock-avg-table-section" id="stockAvgTableSection">
+                        <div class="stock-avg-section-title">Scenario Comparison</div>
+                        <div class="stock-avg-table-container">
+                            <table class="stock-avg-table" id="stockAvgTable">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Buy @</th>
+                                        <th>Qty</th>
+                                        <th>Amount</th>
+                                        <th>New Avg</th>
+                                        <th>P&L</th>
+                                        <th>Gain%</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stockAvgTableBody">
+                                    <tr class="empty-row">
+                                        <td colspan="8">Add scenarios to compare</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="stockAvgReset">Reset All</button>
                 </div>
             </div>
         </div>

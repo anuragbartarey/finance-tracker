@@ -89,6 +89,7 @@ body {
 .header-title {
     font-size: 1.25rem;
     font-weight: 600;
+    font-style: italic;
     color: var(--text-primary);
 }
 
@@ -206,6 +207,230 @@ body {
 .btn-small {
     padding: 4px 8px;
     font-size: 0.75rem;
+}
+
+/* ===== Dropdown Menu ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-arrow {
+    font-size: 0.7rem;
+    margin-left: 4px;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
+    min-width: 160px;
+    background-color: var(--bg-secondary);
+    border: 1px dashed var(--border);
+    z-index: 100;
+    box-shadow: var(--shadow);
+}
+
+.dropdown-menu.active {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(var(--accent-cta-rgb), 0.15);
+}
+
+[data-theme="light"] .dropdown-item:hover {
+    background-color: rgba(var(--accent-cta-rgb), 0.1);
+}
+
+.dropdown-icon {
+    font-size: 1rem;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 4px 0;
+}
+
+/* ===== Notepad Modal ===== */
+.modal-notepad {
+    max-width: 600px;
+    height: 500px;
+}
+
+.notepad-body {
+    flex: 1;
+    display: flex;
+    padding: 0 !important;
+}
+
+.notepad-textarea {
+    width: 100%;
+    height: 100%;
+    padding: 16px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    background-color: var(--bg-primary);
+    border: none;
+    color: var(--text-primary);
+    resize: none;
+    outline: none;
+    line-height: 1.6;
+}
+
+.notepad-textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.notepad-status {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-right: auto;
+}
+
+/* ===== Stock Average Pro Modal ===== */
+.modal.modal-stock-avg {
+    max-width: 900px;
+    max-height: 90vh;
+}
+
+.modal-stock-avg .modal-body {
+    padding: 24px;
+}
+
+.stock-avg-section {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.stock-avg-section-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-cta);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+}
+
+.form-row-3 {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-input-display {
+    padding: 10px 0;
+    font-size: 1rem;
+    background: transparent;
+    border: none;
+    color: var(--accent-cta);
+    font-weight: 600;
+}
+
+.btn-add-scenario {
+    margin-top: 16px;
+}
+
+#avgStockName {
+    text-transform: uppercase;
+}
+
+.stock-avg-table-section {
+    margin-top: 8px;
+    padding-top: 0;
+    border-bottom: none;
+}
+
+.stock-avg-table-container {
+    overflow-x: auto;
+    max-height: 250px;
+    overflow-y: auto;
+    margin-top: 12px;
+    border: 1px dashed var(--border);
+}
+
+.stock-avg-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.stock-avg-table th {
+    padding: 12px 14px;
+    text-align: left;
+    font-weight: 500;
+    color: var(--text-secondary);
+    border-bottom: 1px dashed var(--border);
+    white-space: nowrap;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-secondary);
+}
+
+.stock-avg-table td {
+    padding: 10px 14px;
+    border-bottom: 1px dotted var(--bg-tertiary);
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.stock-avg-table tbody tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+.stock-avg-table .text-right {
+    text-align: right;
+}
+
+.stock-avg-table .col-avg {
+    color: var(--accent-cta);
+    font-weight: 600;
+}
+
+.stock-avg-table .positive {
+    color: var(--accent-green);
+}
+
+.stock-avg-table .negative {
+    color: var(--accent-red);
+}
+
+.stock-avg-table .empty-row td {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 30px;
+}
+
+.stock-avg-table .btn-remove {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 0.9rem;
+}
+
+.stock-avg-table .btn-remove:hover {
+    color: var(--accent-red);
 }
 
 /* ===== Main Content ===== */
@@ -961,6 +1186,23 @@ body {
     border-radius: 4px;
 }
 
+[data-ui-style="modern"] .dropdown-menu {
+    border-style: solid;
+    border-radius: 8px;
+}
+
+[data-ui-style="modern"] .dropdown-item:first-child {
+    border-radius: 7px 7px 0 0;
+}
+
+[data-ui-style="modern"] .dropdown-item:last-child {
+    border-radius: 0 0 7px 7px;
+}
+
+[data-ui-style="modern"] .dropdown-item:only-child {
+    border-radius: 7px;
+}
+
 [data-ui-style="modern"] ::-webkit-scrollbar-thumb {
     border-radius: 4px;
 }
@@ -1077,6 +1319,28 @@ body {
 
 [data-ui-style="minimal"] ::-webkit-scrollbar-thumb {
     border-radius: 4px;
+}
+
+[data-ui-style="minimal"] .dropdown-menu {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25);
+}
+
+[data-ui-style="minimal"] .dropdown-item {
+    padding: 12px 16px;
+}
+
+[data-ui-style="minimal"] .dropdown-item:first-child {
+    border-radius: 11px 11px 0 0;
+}
+
+[data-ui-style="minimal"] .dropdown-item:last-child {
+    border-radius: 0 0 11px 11px;
+}
+
+[data-ui-style="minimal"] .dropdown-item:only-child {
+    border-radius: 11px;
 }
 
 [data-ui-style="minimal"] .style-option {
@@ -1291,6 +1555,48 @@ html[data-ui-style="retro"] {
 
 [data-ui-style="retro"] .style-option:has(input:checked) {
     border-color: var(--accent-cta);
+}
+
+[data-ui-style="retro"] .dropdown-menu {
+    border: 2px solid var(--border);
+    box-shadow: 3px 3px 0 #000000;
+}
+
+[data-ui-style="retro"] .dropdown-item {
+    font-family: 'IBM VGA', monospace;
+}
+
+[data-ui-style="retro"] .dropdown-item:hover {
+    background-color: var(--accent-cta);
+    color: #000000;
+}
+
+[data-ui-style="retro"] .notepad-textarea {
+    font-family: 'IBM VGA', monospace;
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+[data-ui-style="retro"] .stock-avg-section {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="retro"] .stock-avg-section-title {
+    color: var(--accent-purple);
+}
+
+
+[data-ui-style="retro"] .stock-avg-table th {
+    border-bottom-style: solid;
+}
+
+[data-ui-style="retro"] .stock-avg-table td {
+    border-bottom-style: solid;
+    border-color: var(--bg-tertiary);
+}
+
+[data-ui-style="retro"] .stock-avg-table .col-avg {
+    color: var(--accent-cta);
 }
 
 /* Retro: Tighter spacing */
