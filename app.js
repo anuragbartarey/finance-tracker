@@ -47,7 +47,6 @@ function initUIStyle() {
     });
 
     // Settings modal handlers
-    document.getElementById('settingsBtn').addEventListener('click', openSettingsModal);
     document.getElementById('settingsClose').addEventListener('click', closeSettingsModal);
     document.getElementById('settingsClose2').addEventListener('click', closeSettingsModal);
     document.getElementById('settingsOverlay').addEventListener('click', (e) => {
@@ -65,6 +64,266 @@ function openSettingsModal() {
 
 function closeSettingsModal() {
     document.getElementById('settingsOverlay').classList.remove('active');
+}
+
+// ===== Utils Dropdown =====
+function initUtilsDropdown() {
+    const utilsBtn = document.getElementById('utilsBtn');
+    const utilsMenu = document.getElementById('utilsMenu');
+    const notepadBtn = document.getElementById('notepadBtn');
+
+    // Toggle dropdown on button click
+    utilsBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        utilsMenu.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#utilsDropdown')) {
+            utilsMenu.classList.remove('active');
+        }
+    });
+
+    // Close dropdown on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            utilsMenu.classList.remove('active');
+        }
+    });
+
+    // Style button handler
+    const styleBtn = document.getElementById('styleBtn');
+    styleBtn.addEventListener('click', () => {
+        utilsMenu.classList.remove('active');
+        openSettingsModal();
+    });
+
+    // Notepad button handler
+    notepadBtn.addEventListener('click', () => {
+        utilsMenu.classList.remove('active');
+        openNotepadModal();
+    });
+
+    // Stock Average Pro button handler
+    const stockAvgBtn = document.getElementById('stockAvgBtn');
+    stockAvgBtn.addEventListener('click', () => {
+        utilsMenu.classList.remove('active');
+        openStockAvgModal();
+    });
+}
+
+const NOTEPAD_KEY = 'fosphor_notepad';
+
+function initNotepad() {
+    const notepadOverlay = document.getElementById('notepadOverlay');
+    const notepadClose = document.getElementById('notepadClose');
+    const notepadText = document.getElementById('notepadText');
+    const notepadSave = document.getElementById('notepadSave');
+    const notepadClear = document.getElementById('notepadClear');
+    const notepadStatus = document.getElementById('notepadStatus');
+
+    // Load saved notes
+    const savedNotes = localStorage.getItem(NOTEPAD_KEY);
+    if (savedNotes) {
+        notepadText.value = savedNotes;
+    }
+
+    // Close handlers
+    notepadClose.addEventListener('click', closeNotepadModal);
+    notepadOverlay.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeNotepadModal();
+    });
+
+    // Save handler
+    notepadSave.addEventListener('click', () => {
+        localStorage.setItem(NOTEPAD_KEY, notepadText.value);
+        notepadStatus.textContent = 'Saved!';
+        notepadStatus.style.color = 'var(--accent-green)';
+        setTimeout(() => {
+            notepadStatus.textContent = 'Ready';
+            notepadStatus.style.color = '';
+        }, 2000);
+    });
+
+    // Clear handler
+    notepadClear.addEventListener('click', () => {
+        if (confirm('Clear all notes?')) {
+            notepadText.value = '';
+            localStorage.removeItem(NOTEPAD_KEY);
+            notepadStatus.textContent = 'Cleared';
+            setTimeout(() => {
+                notepadStatus.textContent = 'Ready';
+            }, 1500);
+        }
+    });
+
+    // Auto-save on typing (debounced)
+    let saveTimeout;
+    notepadText.addEventListener('input', () => {
+        notepadStatus.textContent = 'Typing...';
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+            localStorage.setItem(NOTEPAD_KEY, notepadText.value);
+            notepadStatus.textContent = 'Auto-saved';
+            setTimeout(() => {
+                notepadStatus.textContent = 'Ready';
+            }, 1500);
+        }, 1000);
+    });
+}
+
+function openNotepadModal() {
+    document.getElementById('notepadOverlay').classList.add('active');
+    document.getElementById('notepadText').focus();
+}
+
+function closeNotepadModal() {
+    document.getElementById('notepadOverlay').classList.remove('active');
+}
+
+// ===== Stock Average Pro =====
+let stockAvgScenarios = [];
+let scenarioCounter = 0;
+
+function initStockAvgPro() {
+    const overlay = document.getElementById('stockAvgOverlay');
+    const closeBtn = document.getElementById('stockAvgClose');
+    const addBtn = document.getElementById('stockAvgAdd');
+    const resetBtn = document.getElementById('stockAvgReset');
+
+    // Close handlers
+    closeBtn.addEventListener('click', closeStockAvgModal);
+    overlay.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeStockAvgModal();
+    });
+
+    // Add scenario button
+    addBtn.addEventListener('click', addStockAvgScenario);
+
+    // Reset button
+    resetBtn.addEventListener('click', resetStockAvg);
+
+    // Auto-update invested amount display
+    document.getElementById('avgBuyPrice').addEventListener('input', updateInvestedDisplay);
+    document.getElementById('avgQtyHeld').addEventListener('input', updateInvestedDisplay);
+
+    // Auto-update new amount display
+    document.getElementById('avgNewPrice').addEventListener('input', updateNewAmountDisplay);
+    document.getElementById('avgNewQty').addEventListener('input', updateNewAmountDisplay);
+
+    // Uppercase stock name
+    document.getElementById('avgStockName').addEventListener('input', (e) => {
+        e.target.value = e.target.value.toUpperCase();
+    });
+}
+
+function updateInvestedDisplay() {
+    const buyPrice = parseFloat(document.getElementById('avgBuyPrice').value) || 0;
+    const qtyHeld = parseFloat(document.getElementById('avgQtyHeld').value) || 0;
+    const invested = buyPrice * qtyHeld;
+    document.getElementById('avgInvestedAmt').textContent = formatCurrency(invested);
+}
+
+function updateNewAmountDisplay() {
+    const newPrice = parseFloat(document.getElementById('avgNewPrice').value) || 0;
+    const newQty = parseFloat(document.getElementById('avgNewQty').value) || 0;
+    const amount = newPrice * newQty;
+    document.getElementById('avgNewAmount').textContent = formatCurrency(amount);
+}
+
+function openStockAvgModal() {
+    document.getElementById('stockAvgOverlay').classList.add('active');
+    document.getElementById('avgStockName').focus();
+}
+
+function closeStockAvgModal() {
+    document.getElementById('stockAvgOverlay').classList.remove('active');
+}
+
+function addStockAvgScenario() {
+    const buyPrice = parseFloat(document.getElementById('avgBuyPrice').value) || 0;
+    const qtyHeld = parseFloat(document.getElementById('avgQtyHeld').value) || 0;
+    const newPrice = parseFloat(document.getElementById('avgNewPrice').value) || 0;
+    const newQty = parseFloat(document.getElementById('avgNewQty').value) || 0;
+
+    if (newPrice <= 0 || newQty <= 0) {
+        alert('Please enter valid buy price and quantity');
+        return;
+    }
+
+    // Calculations
+    const oldInvested = buyPrice * qtyHeld;
+    const newInvested = newPrice * newQty;
+    const totalInvested = oldInvested + newInvested;
+    const totalQty = qtyHeld + newQty;
+    const newAvgPrice = totalQty > 0 ? totalInvested / totalQty : 0;
+    const currentValue = totalQty * newPrice;
+    const pnl = currentValue - totalInvested;
+    const gainPct = totalInvested > 0 ? (pnl / totalInvested) * 100 : 0;
+
+    scenarioCounter++;
+    const scenario = {
+        id: scenarioCounter,
+        newPrice,
+        newQty,
+        amount: newInvested,
+        newAvg: newAvgPrice,
+        pnl,
+        gainPct
+    };
+
+    stockAvgScenarios.push(scenario);
+    renderStockAvgTable();
+
+    // Clear new purchase inputs for next entry
+    document.getElementById('avgNewPrice').value = '';
+    document.getElementById('avgNewQty').value = '';
+    document.getElementById('avgNewAmount').textContent = '₹ 0';
+    document.getElementById('avgNewPrice').focus();
+}
+
+function removeStockAvgScenario(id) {
+    stockAvgScenarios = stockAvgScenarios.filter(s => s.id !== id);
+    renderStockAvgTable();
+}
+
+function renderStockAvgTable() {
+    const tbody = document.getElementById('stockAvgTableBody');
+
+    if (stockAvgScenarios.length === 0) {
+        tbody.innerHTML = '<tr class="empty-row"><td colspan="8">Add scenarios to compare</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = stockAvgScenarios.map((s, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td>₹${s.newPrice.toFixed(2)}</td>
+            <td>${s.newQty}</td>
+            <td>${formatCurrency(s.amount)}</td>
+            <td class="col-avg">₹${s.newAvg.toFixed(2)}</td>
+            <td class="${s.pnl >= 0 ? 'positive' : 'negative'}">${s.pnl >= 0 ? '+' : ''}${formatCurrency(s.pnl)}</td>
+            <td class="${s.gainPct >= 0 ? 'positive' : 'negative'}">${s.gainPct >= 0 ? '+' : ''}${s.gainPct.toFixed(2)}%</td>
+            <td><button class="btn-remove" onclick="removeStockAvgScenario(${s.id})">✕</button></td>
+        </tr>
+    `).join('');
+}
+
+function resetStockAvg() {
+    document.getElementById('avgStockName').value = '';
+    document.getElementById('avgBuyPrice').value = '';
+    document.getElementById('avgQtyHeld').value = '';
+    document.getElementById('avgNewPrice').value = '';
+    document.getElementById('avgNewQty').value = '';
+    document.getElementById('avgInvestedAmt').textContent = '₹ 0';
+    document.getElementById('avgNewAmount').textContent = '₹ 0';
+
+    stockAvgScenarios = [];
+    scenarioCounter = 0;
+    renderStockAvgTable();
+
+    document.getElementById('avgStockName').focus();
 }
 
 // ===== Data Store =====
@@ -94,6 +353,9 @@ let appData = null;
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     initUIStyle();
+    initUtilsDropdown();
+    initNotepad();
+    initStockAvgPro();
     loadData();
     initTabs();
     initModals();
@@ -801,18 +1063,7 @@ function deleteEntry(category, id) {
 // ===== Calculations =====
 function formatCurrency(amount) {
     if (amount === undefined || amount === null) return '₹ 0';
-    const abs = Math.abs(amount);
-    let formatted;
-
-    if (abs >= 10000000) {
-        formatted = (amount / 10000000).toFixed(2) + ' Cr';
-    } else if (abs >= 100000) {
-        formatted = (amount / 100000).toFixed(2) + ' L';
-    } else {
-        formatted = amount.toLocaleString('en-IN');
-    }
-
-    return '₹ ' + formatted;
+    return '₹ ' + amount.toLocaleString('en-IN');
 }
 
 function formatNumber(num) {
