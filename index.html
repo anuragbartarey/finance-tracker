@@ -41,6 +41,9 @@
                         <button class="dropdown-item" id="stockAvgBtn">
                             <span class="dropdown-icon">📊</span> Stock Average Pro
                         </button>
+                        <button class="dropdown-item" id="helpBtn">
+                            <span class="dropdown-icon">?</span> Help
+                        </button>
                     </div>
                 </div>
             </div>
@@ -564,6 +567,60 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" id="stockAvgReset">Reset All</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help Modal -->
+        <div class="modal-overlay" id="helpOverlay">
+            <div class="modal modal-help">
+                <div class="modal-header">
+                    <h3 class="modal-title">? Help</h3>
+                    <button class="modal-close" id="helpClose">&times;</button>
+                </div>
+                <div class="modal-body help-body">
+                    <div class="help-section">
+                        <div class="help-title">FOSPHOR</div>
+                        <p class="help-text">Finance + Phosphor. A local-first personal finance tracker with a retro CRT aesthetic. All data stays in your browser - nothing is sent online.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Portfolio Tracking</div>
+                        <p class="help-text">Track your assets across 8 categories: Savings, FD, PPF, Equity, Mutual Funds, Gold Bonds, PF, and Physical Assets. Use the tabs to switch between categories and add entries.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Snapshots</div>
+                        <p class="help-text">Click "Update" to save a snapshot of your current portfolio. This lets you compare your current values against the previous snapshot to see gains/losses.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Import / Export</div>
+                        <p class="help-text">Export your data as JSON to backup or transfer. Import a previously exported file to restore your data.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Utils → Style</div>
+                        <p class="help-text">Choose from 4 UI styles: Terminal (default), Modern, Minimal, or Retro (DOS aesthetic with IBM VGA font).</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Utils → Notepad</div>
+                        <p class="help-text">A simple notepad that auto-saves to your browser. Supports inline calculations - type <code>doMath(5 + 3)</code> and it evaluates to <code>8</code>.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Utils → Stock Average Pro</div>
+                        <p class="help-text">Calculate how buying more shares affects your average price. Enter your current holding, then add scenarios to compare different buy prices and quantities.</p>
+                    </div>
+
+                    <div class="help-section">
+                        <div class="help-title">Theme Toggle</div>
+                        <p class="help-text">Click the ☀/☽ icon to switch between light and dark themes.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="helpClose2">Close</button>
                 </div>
             </div>
         </div>

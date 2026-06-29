@@ -111,6 +111,34 @@ function initUtilsDropdown() {
         utilsMenu.classList.remove('active');
         openStockAvgModal();
     });
+
+    // Help button handler
+    const helpBtn = document.getElementById('helpBtn');
+    helpBtn.addEventListener('click', () => {
+        utilsMenu.classList.remove('active');
+        openHelpModal();
+    });
+}
+
+// ===== Help Modal =====
+function initHelp() {
+    const helpOverlay = document.getElementById('helpOverlay');
+    const helpClose = document.getElementById('helpClose');
+    const helpClose2 = document.getElementById('helpClose2');
+
+    helpClose.addEventListener('click', closeHelpModal);
+    helpClose2.addEventListener('click', closeHelpModal);
+    helpOverlay.addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) closeHelpModal();
+    });
+}
+
+function openHelpModal() {
+    document.getElementById('helpOverlay').classList.add('active');
+}
+
+function closeHelpModal() {
+    document.getElementById('helpOverlay').classList.remove('active');
 }
 
 const NOTEPAD_KEY = 'fosphor_notepad';
@@ -160,7 +188,10 @@ function initNotepad() {
 
     // Auto-save on typing (debounced)
     let saveTimeout;
-    notepadText.addEventListener('input', () => {
+    notepadText.addEventListener('input', (e) => {
+        // Check for doMath() expressions
+        processDoMath(notepadText);
+
         notepadStatus.textContent = 'Typing...';
         clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
@@ -171,6 +202,53 @@ function initNotepad() {
             }, 1500);
         }, 1000);
     });
+}
+
+// doMath() - inline calculator for notepad
+function processDoMath(textarea) {
+    const text = textarea.value;
+    const cursorPos = textarea.selectionStart;
+
+    // Pattern: doMath(number operator number)
+    const pattern = /doMath\(\s*(-?\d+\.?\d*)\s*([\+\-\*\/])\s*(-?\d+\.?\d*)\s*\)/g;
+
+    let newText = text;
+    let match;
+    let offset = 0;
+
+    while ((match = pattern.exec(text)) !== null) {
+        const fullMatch = match[0];
+        const num1 = parseFloat(match[1]);
+        const operator = match[2];
+        const num2 = parseFloat(match[3]);
+
+        let result;
+        switch (operator) {
+            case '+': result = num1 + num2; break;
+            case '-': result = num1 - num2; break;
+            case '*': result = num1 * num2; break;
+            case '/': result = num2 !== 0 ? num1 / num2 : 'Error'; break;
+        }
+
+        // Format result (remove unnecessary decimals)
+        if (typeof result === 'number') {
+            result = Number.isInteger(result) ? result : parseFloat(result.toFixed(6));
+        }
+
+        const replacement = `${result}`;
+        const matchStart = match.index + offset;
+        const matchEnd = matchStart + fullMatch.length;
+
+        newText = newText.substring(0, matchStart) + replacement + newText.substring(matchEnd);
+        offset += replacement.length - fullMatch.length;
+    }
+
+    if (newText !== text) {
+        // Calculate new cursor position
+        const newCursorPos = Math.min(cursorPos + offset, newText.length);
+        textarea.value = newText;
+        textarea.setSelectionRange(newCursorPos, newCursorPos);
+    }
 }
 
 function openNotepadModal() {
@@ -356,6 +434,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initUtilsDropdown();
     initNotepad();
     initStockAvgPro();
+    initHelp();
     loadData();
     initTabs();
     initModals();
